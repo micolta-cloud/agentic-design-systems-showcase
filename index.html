@@ -1,0 +1,2580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agentic Design System Framework — AI-Vision</title>
+  
+  <!-- Google Fonts CDN Ingestion (Google Sans Flex, Google Sans Text, Outfit, Inter, JetBrains Mono, Material Symbols) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:ROND,wght@0..100,100..1000&family=Google+Sans+Text:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       DESIGN SYSTEM ENGINE — FIGMA NODE 34:194 (DESKTOP - 3) EXACT REPLICATION
+       ========================================================================== */
+    :root {
+      --bg-dark: #07090E;
+      --surface-light: #FFFFFF;
+      --surface-card-light: #F0F4F9;
+      --surface-card-border: #E1E3E1;
+      --text-dark-primary: #1F1F1F;
+      --text-dark-secondary: #444746;
+      --text-light-primary: #FFFFFF;
+      --text-light-muted: #9CA3AF;
+      --accent-blue: #0B57D0;
+      --accent-cyan: #00C2FF;
+      --accent-purple: #8338EC;
+      --font-main: 'Google Sans Text', 'Inter', -apple-system, sans-serif;
+      --font-display: 'Google Sans Flex', 'Outfit', sans-serif;
+      --font-code: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-light-primary);
+      font-family: var(--font-main);
+      line-height: 1.5;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Layout Container */
+    .container {
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 32px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* -------------------------------------------------------------------------- */
+    /* 1. HERO SECTION (FIGMA NODE 34:342)                                        */
+    /* -------------------------------------------------------------------------- */
+    .hero-section {
+      width: 100%;
+      height: 200vh;
+      position: relative;
+      z-index: 2;
+      background: linear-gradient(125deg, #7B2CBF 0%, #1D4ED8 50%, #00C2FF 100%);
+    }
+
+    .hero-sticky-stage {
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    /* Moving Fluid Background & Noise Texture */
+    .fluid-gradient-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+      background: linear-gradient(125deg, #7B2CBF 0%, #1D4ED8 50%, #00C2FF 100%);
+      pointer-events: none;
+    }
+
+    .gradient-orb {
+      position: absolute;
+      border-radius: 50%;
+      will-change: transform;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+    }
+
+    .orb-purple {
+      width: 950px;
+      height: 950px;
+      background: radial-gradient(circle, #8338EC 0%, #7209B7 60%, transparent 80%);
+      top: -150px;
+      left: -200px;
+      filter: blur(80px);
+      opacity: 0.95;
+      animation: floatPurple 16s ease-in-out infinite alternate;
+    }
+
+    .orb-cyan {
+      width: 1050px;
+      height: 1050px;
+      background: radial-gradient(circle, #00C2FF 0%, #00B4D8 60%, transparent 80%);
+      bottom: -200px;
+      right: -200px;
+      filter: blur(80px);
+      opacity: 0.95;
+      animation: floatCyan 18s ease-in-out infinite alternate;
+    }
+
+    .orb-interactive {
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 194, 255, 0.55) 0%, rgba(131, 56, 236, 0.4) 45%, transparent 75%);
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 1;
+      transform: translate(-50%, -50%);
+      will-change: transform, left, top;
+    }
+
+    @keyframes floatPurple {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(160px, 140px) scale(1.18); }
+      100% { transform: translate(80px, 200px) scale(1.05); }
+    }
+
+    @keyframes floatCyan {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-180px, -150px) scale(1.22); }
+      100% { transform: translate(-90px, -220px) scale(1.1); }
+    }
+
+    .noise-texture-overlay {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.12;
+      mix-blend-mode: soft-light;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    /* Fixed Top Navigation Bar (Node 34:285 & Node 20:30) */
+    header.top-header {
+      width: 100%;
+      padding-top: 32px;
+      padding-bottom: 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 100;
+      background: transparent;
+    }
+
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .brand-logo-text {
+      font-family: 'Google Sans Flex', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      font-variation-settings: 'wght' 700;
+      color: #FFFFFF;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      letter-spacing: -0.5px;
+      transition: color 0.3s cubic-bezier(0.2, 0, 0, 1);
+    }
+
+    .brand-logo-text .dot {
+      color: var(--accent-cyan);
+      font-size: 26px;
+      line-height: 0;
+      transition: color 0.3s cubic-bezier(0.2, 0, 0, 1);
+    }
+
+    .brand-logo-text.theme-light-logo {
+      color: #041E49 !important;
+    }
+
+    .brand-logo-text.theme-light-logo .dot {
+      color: #0B57D0 !important;
+    }
+
+    .brand-logo-text.theme-dark-logo {
+      color: #FFFFFF !important;
+    }
+
+    .brand-logo-text.theme-dark-logo .dot {
+      color: #00C2FF !important;
+    }
+
+    .menu-pill-track {
+      background: rgba(8, 66, 160, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 48px;
+      padding: 6px 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    }
+
+    .menu-item-pill {
+      border-radius: 48px;
+      padding: 8px 16px;
+      font-family: 'Google Sans Flex', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: #E1E3E1;
+      text-decoration: none;
+      transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+    }
+
+    .menu-item-pill:hover {
+      color: #FFFFFF;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .menu-item-pill.active {
+      background: #FFFFFF;
+      color: #1F1F1F;
+      font-weight: 600;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-download-primary {
+      background-color: var(--accent-blue);
+      color: #FFFFFF;
+      border: none;
+      border-radius: 100px;
+      padding: 10px 22px;
+      font-family: 'Google Sans Text', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+      box-shadow: 0 4px 14px rgba(11, 87, 208, 0.35);
+    }
+
+    .btn-download-primary:hover {
+      transform: translateY(-2px);
+      background-color: #0A4EB8;
+      box-shadow: 0 6px 22px rgba(11, 87, 208, 0.55);
+    }
+
+    /* Hero Display Title & Subtitle (Node 34:284 & 35:77) */
+    .hero-content-wrapper {
+      position: relative;
+      z-index: 2;
+      max-width: 1060px;
+      margin: 0 auto;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-main-title {
+      font-family: 'Google Sans Flex', -apple-system, sans-serif;
+      font-size: 68px;
+      font-weight: 400;
+      font-variation-settings: 'wght' 400;
+      line-height: 1.15;
+      color: #FFFFFF;
+      letter-spacing: -0.5px;
+      text-align: center;
+      margin: 0 auto;
+      transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+      will-change: opacity, transform;
+    }
+
+    .hero-subtitle-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      max-width: 960px;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+      will-change: opacity, transform;
+    }
+
+    .hero-subtitle-text {
+      font-family: 'Google Sans Text', sans-serif;
+      font-size: 22px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.95);
+      max-width: 960px;
+      margin: 0 auto 40px;
+    }
+
+    /* Scroll Indicator (Scroll to Explore Text + Bouncing Arrow) */
+    .scroll-indicator {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255, 255, 255, 0.85);
+      font-family: 'Google Sans Text', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      margin: 0 auto;
+      transition: color 0.25s ease, opacity 0.25s ease;
+      cursor: pointer;
+    }
+
+    .scroll-indicator:hover {
+      color: #FFFFFF;
+    }
+
+    .scroll-indicator .arrow-icon {
+      font-size: 24px;
+      animation: bounceArrow 2s infinite;
+    }
+
+    @keyframes bounceArrow {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(8px); }
+      60% { transform: translateY(4px); }
+    }
+
+    /* -------------------------------------------------------------------------- */
+    /* 2. VISION & INTENT SECTION (FIGMA NODE 34:199 & 34:206) — LIGHT THEME      */
+    /* -------------------------------------------------------------------------- */
+    .section-vision-light {
+      background-color: #FFFFFF;
+      color: var(--text-dark-primary);
+      padding: 120px 0 140px;
+      position: relative;
+      z-index: 10;
+      margin-top: -60px;
+      border-radius: 36px 36px 0 0;
+      box-shadow: 0 -20px 60px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Single Statement Headline (Node 34:203) */
+    .vision-statement-headline {
+      font-family: 'Google Sans Flex', sans-serif;
+      font-size: 32px;
+      font-weight: 600;
+      font-variation-settings: 'wght' 600;
+      line-height: 1.4;
+      color: var(--text-dark-primary);
+      text-align: center;
+      max-width: 1100px;
+      margin: 0 auto 56px;
+      letter-spacing: -0.3px;
+    }
+
+    /* Tab Bar Controls Container (Node 35:115) */
+    .vision-tabs-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 72px;
+      margin-bottom: 48px;
+    }
+
+    .vision-tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+    }
+
+    .vision-tab-item:hover {
+      transform: translateY(-2px);
+    }
+
+    .vision-tab-icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #F0F4F9;
+      color: #444746;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease;
+    }
+
+    .vision-tab-item.active .vision-tab-icon-box {
+      background: #0B57D0;
+      color: #FFFFFF;
+      box-shadow: 0 4px 16px rgba(11, 87, 208, 0.35);
+    }
+
+    .vision-tab-title {
+      font-family: 'Google Sans Flex', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      font-variation-settings: 'wght' 600;
+      color: #444746;
+      transition: color 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .vision-tab-item.active .vision-tab-title {
+      color: #0B57D0;
+      font-weight: 700;
+    }
+
+    /* Active Tab Content Card (Node 34:206 & 35:129 & 35:131) */
+    .vision-card-container {
+      background: #F0F4F9;
+      border-radius: 24px;
+      padding: 48px;
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 40px;
+      align-items: center;
+      max-width: 1062px;
+      margin: 0 auto;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.06);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .vision-card-left {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .vision-card-heading {
+      font-family: 'Google Sans Flex', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      font-variation-settings: 'wght' 700;
+      line-height: 1.35;
+      color: #1F1F1F;
+    }
+
+    .vision-card-body {
+      font-family: 'Google Sans Text', sans-serif;
+      font-size: 14px;
+      line-height: 1.65;
+      color: #444746;
+    }
+
+    /* Media Area Placeholder & Image Container (Node 35:131) */
+    .media-area-placeholder {
+      background: #FFFFFF;
+      border: 1px solid #E1E3E1;
+      border-radius: 20px;
+      height: 340px;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .media-area-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 20px;
+      transition: opacity 0.25s ease;
+    }
+
+    /* -------------------------------------------------------------------------- */
+    /* 2B. DOCUMENTATION CONTRACT SECTION — LIGHT BLUE ARCHITECTURE (ACCESSIBLE)  */
+    /* -------------------------------------------------------------------------- */
+    .section-contract-light {
+      background: linear-gradient(180deg, #EBF3FE 0%, #DCE8FA 100%);
+      color: #041E49;
+      padding: 120px 0 160px; /* Generous top and bottom padding */
+      position: relative;
+      z-index: 10;
+      border-top: 1.5px solid #C4D7F5;
+      border-bottom: 1.5px solid #C4D7F5;
+    }
+
+    .contract-root-box {
+      background: #FFFFFF;
+      border: 2.5px solid #0B57D0;
+      border-radius: 20px;
+      padding: 24px 48px;
+      max-width: 500px;
+      margin: 0 auto 36px;
+      text-align: center;
+      box-shadow: 0 12px 36px rgba(11, 87, 208, 0.14);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .contract-root-title {
+      font-family: 'Google Sans Flex', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #041E49;
+      letter-spacing: -0.3px;
+    }
+
+    /* Branching Connector Lines */
+    .tree-branch-svg {
+      width: 100%;
+      height: 54px;
+      margin-bottom: 24px;
+      display: block;
+    }
+
+    .contract-4-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .contract-pillar-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .pillar-top-card {
+      background: #0B57D0;
+      border: 1.5px solid #0A4EB8;
+      border-radius: 16px;
+      padding: 20px;
+      width: 100%;
+      min-height: 96px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(11, 87, 208, 0.2);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .pillar-top-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 32px rgba(11, 87, 208, 0.35);
+      border-color: #041E49;
+    }
+
+    .pillar-title {
+      font-family: 'Google Sans Flex', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1.35;
+    }
+
+    .pillar-arrow-icon {
+      color: #0B57D0;
+      font-size: 28px;
+      animation: pulseArrow 2s infinite;
+    }
+
+    @keyframes pulseArrow {
+      0%, 100% { transform: translateY(0); opacity: 0.85; }
+      50% { transform: translateY(5px); opacity: 1; }
+    }
+
+    .pillar-bottom-card {
+      background: #FFFFFF;
+      border: 1.5px solid #A8C7FA;
+      border-radius: 16px;
+      padding: 22px;
+      width: 100%;
+      min-height: 155px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .pillar-bottom-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(11, 87, 208, 0.15);
+      border-color: #0B57D0;
+    }
+
+    .pillar-desc-text {
+      font-family: 'Google Sans Text', sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #1F2937;
+      font-weight: 500;
+    }
+
+    .pillar-folder-badge {
+      font-family: var(--font-code);
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #0B57D0;
+      background: #E8F0FE;
+      border: 1px solid #A8C7FA;
+      padding: 4px 12px;
+      border-radius: 14px;
+      width: fit-content;
+      margin: 14px auto 0;
+    }
+
+    /* -------------------------------------------------------------------------- */
+    /* 3. 4-SKILL SUITE SECTION — LIGHT THEME                                    */
+    /* -------------------------------------------------------------------------- */
+    .section-skills-light {
+      background: #F8FAFC;
+      color: #1F1F1F;
+      padding: 120px 0 140px;
+      position: relative;
+      z-index: 10;
+      overflow: hidden;
+      border-top: 1px solid #E1E3E1;
+      border-bottom: 1px solid #E1E3E1;
+    }
+
+    .skills-split-layout {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    .skills-left-headline {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: sticky;
+      top: 120px;
+    }
+
+    .skill-tag-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #FFFFFF;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      width: fit-content;
+    }
+
+    .skills-main-title {
+      font-family: 'Google Sans Flex', sans-serif;
+      font-size: 44px;
+      font-weight: 700;
+      font-variation-settings: 'wght' 700;
+      color: #FFFFFF;
+      letter-spacing: -0.5px;
+    }
+
+    .skills-subtitle-desc {
+      font-family: 'Google Sans Text', sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* 2x2 White Cards Grid (Node 34:243) */
+    .skills-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .skill-card-white {
+      background: #FFFFFF;
+      border-radius: 20px;
+      padding: 32px;
+      color: #1F1F1F;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      min-height: 290px;
+    }
+
+    .skill-card-white:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    .skill-card-icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #F0F4F9;
+      color: #0B57D0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .skill-card-title {
+      font-family: 'Google Sans Flex', sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      font-variation-settings: 'wght' 600;
+      color: #1F1F1F;
+      margin-bottom: 12px;
+    }
+
+    .skill-card-body {
+      font-family: 'Google Sans Text', sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #444746;
+      margin-bottom: 24px;
+    }
+
+    .skill-tag-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .skill-tag-chip-blue {
+      background: #E8F0FE;
+      color: #0B57D0;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 16px;
+    }
+
+    /* -------------------------------------------------------------------------- */
+    /* 4. PLAYBOOK & DOD SECTION (EXACT FIGMA NODE 42:69 REPLICATION)             */
+    /* -------------------------------------------------------------------------- */
+    .section-playbook-light {
+      background-color: #FFFFFF;
+      color: var(--text-dark-primary);
+      padding: 120px 0 180px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .playbook-node-layout {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    .playbook-steps-left {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .playbook-heading-title {
+      font-family: 'Google Sans Flex', sans-serif;
+      font-size: 44px;
+      font-weight: 700;
+      font-variation-settings: 'wght' 700;
+      line-height: 1.15;
+      color: #1F1F1F;
+      letter-spacing: -0.5px;
+      margin-top: 12px;
+      margin-bottom: 24px;
+    }
+
+    .playbook-step-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      border-left: 3px solid #E1E3E1;
+      padding-left: 20px;
+      cursor: pointer;
+      user-select: none;
+      transition: border-color 0.3s ease, transform 0.3s ease, background 0.3s ease;
+      border-radius: 0 8px 8px 0;
+      padding-top: 4px;
+      padding-bottom: 4px;
+    }
+
+    .playbook-step-item.active,
+    .playbook-step-item:hover {
+      border-color: #0B57D0;
+      transform: translateX(6px);
+      background: rgba(11, 87, 208, 0.04);
+    }
+
+    .playbook-step-title {
+      font-family: 'Google Sans Flex', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      font-variation-settings: 'wght' 600;
+      color: #1F1F1F;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .playbook-step-item.active .playbook-step-title {
+      color: #0B57D0;
+    }
+
+    .playbook-step-desc {
+      font-family: 'Google Sans Text', sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #444746;
+    }
+
+    /* Animated Checklist Card inside Media Placeholder (Node 43:110) */
+    .media-placeholder-card {
+      background: #F0F4F9;
+      border: 1px solid #E1E3E1;
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      min-height: 495px;
+      justify-content: space-between;
+    }
+
+    .checklist-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .checklist-header-title {
+      font-family: 'Google Sans Flex', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      font-variation-settings: 'wght' 700;
+      color: #1F1F1F;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .checklist-counter-badge {
+      background: #0B57D0;
+      color: #FFFFFF;
+      font-family: 'Google Sans Text', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 4px 14px;
+      border-radius: 20px;
+    }
+
+    .checklist-progress-bar-bg {
+      width: 100%;
+      height: 8px;
+      background: #E1E3E1;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .checklist-progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #0B57D0, #00C2FF);
+      border-radius: 4px;
+      transition: width 0.5s ease-out;
+    }
+
+    .checklist-items-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .animated-check-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: #FFFFFF;
+      border: 1px solid #E1E3E1;
+      border-radius: 14px;
+      padding: 14px 18px;
+      opacity: 0.4;
+      transform: translateX(12px);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .animated-check-item.checked {
+      opacity: 1;
+      transform: translateX(0);
+      border-color: #0B57D0;
+      box-shadow: 0 4px 16px rgba(11, 87, 208, 0.1);
+    }
+
+    .animated-check-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #E1E3E1;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .animated-check-item.checked .animated-check-icon {
+      background: #0B57D0;
+    }
+
+    .animated-check-text {
+      font-family: 'Google Sans Text', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #1F1F1F;
+      line-height: 1.45;
+    }
+
+    /* -------------------------------------------------------------------------- */
+    /* 4B. TOKEN SETUP & EXPORTING VARIABLES SECTION (EXACT NODE 44:161 OCEAN THEME)*/
+    /* -------------------------------------------------------------------------- */
+    .section-tokens-dark {
+      background: radial-gradient(circle at 10% 75%, rgba(0, 194, 255, 0.45) 0%, rgba(0, 110, 145, 0.25) 45%, transparent 75%), #003644;
+      color: #FFFFFF;
+      padding: 120px 0 140px;
+      position: relative;
+      z-index: 10;
+      overflow: hidden;
+    }
+
+    .tokens-split-layout {
+      display: grid;
+      grid-template-columns: 440px 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    .tokens-section-title {
+      font-family: 'Google Sans Flex', sans-serif;
+      font-size: 44px;
+      font-weight: 700;
+      font-variation-settings: 'wght' 700;
+      color: #FFFFFF;
+      line-height: 1.15;
+      margin-top: 12px;
+      margin-bottom: 32px;
+      letter-spacing: -0.5px;
+    }
+
+    .tokens-section-subtitle {
+      font-family: 'Google Sans Text', sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 28px;
+    }
+
+    .token-export-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .export-step-card {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 20px 24px;
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .export-step-card:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.35);
+      transform: translateY(-2px);
+    }
+
+    .step-num-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #FFFFFF;
+      font-family: 'Google Sans Flex', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-title {
+      font-family: 'Google Sans Flex', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      font-variation-settings: 'wght' 600;
+      color: #FFFFFF;
+      margin-bottom: 6px;
+    }
+
+    .step-desc {
+      font-family: 'Google Sans Text', sans-serif;
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    /* Media Placeholder Container (Node 44:248) */
+    /* Media Placeholder Container (Node 44:248) */
+    .tokens-media-placeholder {
+      background: transparent;
+      border-radius: 20px;
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Browser GIF Mockup Frame */
+    .gif-browser-mockup {
+      background: #141518;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+      width: 100%;
+    }
+
+    .gif-browser-header {
+      background: #1B1C20;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .window-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .window-dots .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .window-dots .dot.red { background: #FF5F56; }
+    .window-dots .dot.yellow { background: #FFBD2E; }
+    .window-dots .dot.green { background: #27C93F; }
+
+    .gif-window-title {
+      font-family: var(--font-code);
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .gif-live-badge {
+      background: rgba(0, 194, 255, 0.15);
+      color: #00C2FF;
+      border: 1px solid rgba(0, 194, 255, 0.4);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    .gif-container {
+      width: 100%;
+      background: #0E0F12;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .tokens-export-gif {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+    }
+
+    /* AI Prompt Simulator Box inside Showcase Section */
+    .ai-prompt-simulator {
+      background: rgba(18, 19, 22, 0.95);
+      border: 1px solid rgba(0, 194, 255, 0.35);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 48px;
+      box-shadow: 0 16px 48px rgba(0, 194, 255, 0.1);
+    }
+
+    .prompt-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .prompt-terminal-input {
+      background: #0B0C0E;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 20px;
+      font-family: var(--font-code);
+      font-size: 13px;
+      line-height: 1.6;
+      color: #00C2FF;
+      min-height: 110px;
+      word-break: break-all;
+    }
+
+    .prompt-terminal-input .cursor-blink {
+      display: inline-block;
+      width: 8px;
+      height: 16px;
+      background: #00C2FF;
+      margin-left: 4px;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* -------------------------------------------------------------------------- */
+    /* 5. INTERACTIVE COMPONENT SHOWCASE (MATCHING NODE 34:237 DARK THEME)        */
+    /* -------------------------------------------------------------------------- */
+    .section-showcase-dark {
+      background: radial-gradient(circle at 85% 30%, rgba(0, 194, 255, 0.35) 0%, rgba(11, 87, 208, 0.2) 45%, transparent 75%), #18191B;
+      color: #FFFFFF;
+      padding: 120px 0 140px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .showcase-two-column-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 36px;
+    }
+
+    @media (max-width: 1024px) {
+      .showcase-two-column-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .showcase-card-dark-glass {
+      background: rgba(24, 25, 27, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(16px);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card-title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .card-title-heading {
+      font-family: 'Google Sans Flex', sans-serif;
+      font-size: 19px;
+      font-weight: 700;
+      line-height: 1.35;
+      color: #FFFFFF;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .card-title-heading .material-symbols-outlined {
+      font-size: 22px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .card-title-badge-pill {
+      border: 1px solid rgba(0, 194, 255, 0.4);
+      background: rgba(0, 194, 255, 0.15);
+      color: #00C2FF;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 12px;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .context-package-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .context-pill {
+      background: rgba(0, 194, 255, 0.12);
+      border: 1px solid rgba(0, 194, 255, 0.3);
+      color: #00C2FF;
+      font-family: 'Google Sans Text', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .prompt-code-container {
+      background: #0E0F12;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .prompt-code-header {
+      background: #16181D;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      font-family: var(--font-code);
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .prompt-code-body {
+      padding: 18px 20px;
+      font-family: var(--font-code);
+      font-size: 12.5px;
+      line-height: 1.65;
+      color: #A5D6FF;
+      max-height: 380px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+
+    .btn-copy-prompt {
+      background: rgba(0, 194, 255, 0.15);
+      border: 1px solid rgba(0, 194, 255, 0.4);
+      color: #00C2FF;
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-copy-prompt:hover {
+      background: #00C2FF;
+      color: #0E0F12;
+    }
+
+    .folder-tree-box {
+      background: #0E0F12;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 20px;
+      font-family: var(--font-code);
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.9);
+      max-height: 480px;
+      overflow-y: auto;
+    }
+
+    .tree-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 8px;
+      transition: background 0.2s ease;
+      border-radius: 6px;
+    }
+
+    .tree-row:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .tree-row.indent-1 { padding-left: 22px; }
+    .tree-row.indent-2 { padding-left: 44px; }
+    .tree-row.indent-3 { padding-left: 66px; }
+
+    .tree-icon-folder { color: #F59E0B; font-size: 18px; }
+    .tree-icon-skill { color: #00C2FF; font-size: 18px; }
+    .tree-icon-tokens { color: #EC4899; font-size: 18px; }
+    .tree-icon-spec { color: #3B82F6; font-size: 18px; }
+    .tree-icon-preview { color: #10B981; font-size: 18px; }
+
+    .tree-tag {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-left: auto;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .tree-tag-skill { background: rgba(0, 194, 255, 0.2); color: #00C2FF; border: 1px solid rgba(0, 194, 255, 0.4); }
+    .tree-tag-token { background: rgba(236, 72, 153, 0.2); color: #F472B6; border: 1px solid rgba(236, 72, 153, 0.4); }
+    .tree-tag-spec { background: rgba(59, 130, 246, 0.2); color: #60A5FA; border: 1px solid rgba(59, 130, 246, 0.4); }
+    .tree-tag-preview { background: rgba(16, 185, 129, 0.2); color: #34D399; border: 1px solid rgba(16, 185, 129, 0.4); }
+
+    .showcase-card-white {
+      background: #FFFFFF;
+      border-radius: 20px;
+      padding: 36px;
+      color: #1F1F1F;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    .preview-frame-box {
+      background: #F0F4F9;
+      border: 1px solid #E1E3E1;
+      border-radius: 16px;
+      padding: 28px;
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn-secondary-blue {
+      background: #0B57D0;
+      color: #FFFFFF;
+      padding: 12px 24px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-family: 'Google Sans Text', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s ease, background 0.2s ease;
+      box-shadow: 0 4px 14px rgba(11, 87, 208, 0.3);
+    }
+
+    .btn-secondary-blue:hover {
+      transform: translateY(-2px);
+      background: #0A4EB8;
+    }
+
+    /* -------------------------------------------------------------------------- */
+    /* 6. DOWNLOADS & RESOURCES HUB (MATCHING NODE 34:194 LIGHT THEME)            */
+    /* -------------------------------------------------------------------------- */
+    .section-downloads-light {
+      background-color: #FFFFFF;
+      color: var(--text-dark-primary);
+      padding: 120px 0 140px;
+      position: relative;
+      z-index: 10;
+      border-top: 1px solid #E1E3E1;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .download-card-blue {
+      background: #F0F4F9;
+      border-radius: 20px;
+      padding: 36px;
+      color: #1F1F1F;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+      min-height: 280px;
+    }
+
+    .download-card-blue:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid #E1E3E1;
+      padding: 48px 0;
+      text-align: center;
+      color: #444746;
+      font-size: 14px;
+      position: relative;
+      z-index: 10;
+      background: #FFFFFF;
+    }
+
+    /* Reveal On Scroll */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-on-scroll.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- FIXED TOP NAVIGATION BAR (Node 34:285 & 20:30) -->
+  <header class="top-header">
+    <div class="container nav-bar">
+      <a href="#" class="brand-logo-text">
+        AI<span class="dot">•</span>Vision
+      </a>
+
+      <!-- Center Floating Menu Pill Track (6 Items) -->
+      <div class="menu-pill-track">
+        <a href="#hero" class="menu-item-pill active" onclick="setActiveNav(this)">Vision</a>
+        <a href="#contract" class="menu-item-pill" onclick="setActiveNav(this)">Contract</a>
+        <a href="#playbook" class="menu-item-pill" onclick="setActiveNav(this)">Playbook</a>
+        <a href="#tokens" class="menu-item-pill" onclick="setActiveNav(this)">Token Setup</a>
+        <a href="#skills" class="menu-item-pill" onclick="setActiveNav(this)">4-Skill Suite</a>
+        <a href="#showcase" class="menu-item-pill" onclick="setActiveNav(this)">Interactive Components</a>
+      </div>
+
+      <a href="#downloads" class="btn-download-primary">
+        <span class="material-symbols-outlined" style="font-size:18px;">download</span>
+        Download Specs
+      </a>
+    </div>
+  </header>
+
+  <!-- 1. HERO SECTION (FIGMA NODE 34:342) -->
+  <section id="hero" class="hero-section">
+    <div class="hero-sticky-stage">
+      <div class="fluid-gradient-bg">
+        <div class="gradient-orb orb-purple"></div>
+        <div class="gradient-orb orb-cyan"></div>
+        <div class="gradient-orb orb-interactive"></div>
+      </div>
+      <div class="noise-texture-overlay"></div>
+
+      <div class="container hero-content-wrapper">
+        <h1 class="hero-main-title">
+          Agentic Design System<br>Framework
+        </h1>
+
+        <div class="hero-subtitle-wrapper">
+          <p class="hero-subtitle-text">
+            An autonomous agentic workflow that parses Figma component sets, enforces 0% hardcoded HEX token purity, builds bottom-up atomic trees, and generates production-ready specs.
+          </p>
+
+          <!-- Scroll Down Indicator -->
+          <a href="#vision" class="scroll-indicator" aria-label="Scroll to Vision section">
+            <span>Scroll to explore</span>
+            <span class="material-symbols-outlined arrow-icon">keyboard_arrow_down</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. VISION & INTENT SECTION (FIGMA NODE 34:199 & 34:206) — LIGHT THEME -->
+  <section id="vision" class="section-vision-light">
+    <div class="container">
+      
+      <!-- Single Statement Headline (Node 34:203) -->
+      <h2 class="vision-statement-headline reveal-on-scroll">
+        By uniting pure token resolution with bottom-up atomic trees, we enable AI agents to generate production-ready UI directly from your design system.
+      </h2>
+
+      <!-- Tab Bar Controls Container (Node 35:115) -->
+      <div class="vision-tabs-bar reveal-on-scroll">
+        <!-- Tab 1: 100% Token Purity -->
+        <div class="vision-tab-item active" onclick="switchVisionTab('purity', this)">
+          <div class="vision-tab-icon-box">
+            <span class="material-symbols-outlined">palette</span>
+          </div>
+          <span class="vision-tab-title">100% Token Purity</span>
+        </div>
+
+        <!-- Tab 2: Bottom-Up Atomic Trees -->
+        <div class="vision-tab-item" onclick="switchVisionTab('atomic', this)">
+          <div class="vision-tab-icon-box">
+            <span class="material-symbols-outlined">account_tree</span>
+          </div>
+          <span class="vision-tab-title">Bottom-Up Atomic Trees</span>
+        </div>
+
+        <!-- Tab 3: Dual-Node Master -->
+        <div class="vision-tab-item" onclick="switchVisionTab('dualnode', this)">
+          <div class="vision-tab-icon-box">
+            <span class="material-symbols-outlined">layers</span>
+          </div>
+          <span class="vision-tab-title">Dual-Node Master</span>
+        </div>
+      </div>
+
+      <!-- Active Tab Content Card (Node 34:206) -->
+      <div class="vision-card-container reveal-on-scroll">
+        <!-- Left Text Content (Frame 13 / 35:129) -->
+        <div class="vision-card-left">
+          <h3 id="vision-card-heading" class="vision-card-heading">
+            Single Source of Truth with Zero Hardcoded Values.
+          </h3>
+          <p id="vision-card-body" class="vision-card-body">
+            Zero hardcoded hex codes (#FFFFFF) or static pixels (16px). All styles dynamically reference design system tokens (Light, Dark, Spacing), guaranteeing instant global theme updates without code debt.
+          </p>
+        </div>
+
+        <!-- Right Media Area Container (Node 35:131) -->
+        <div class="media-area-placeholder">
+          <img id="vision-media-img" src="./Assets/token-purity-img.png" alt="Token Purity Visual Screenshot">
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 2B. PHASE 1: DOCUMENTATION CONTRACT & ARCHITECTURE SECTION -->
+  <section id="contract" class="section-contract-light" role="region" aria-label="Phase 1 Documentation Contract & Architecture Blueprint">
+    <div class="container">
+      <div class="reveal-on-scroll" style="margin-bottom: 48px; text-align: center;">
+        <div class="skill-tag-chip-blue" style="margin: 0 auto 12px; width: fit-content; background: #0B57D0; color: #FFFFFF; font-weight: 700;">ARCHITECTURE BLUEPRINT</div>
+        <h2 style="font-family:'Google Sans Flex',sans-serif; font-size:38px; font-weight:700; color:#041E49; margin-bottom:14px;">Phase 1: Documentation Contract</h2>
+        <p style="color:#2D3748; font-size:16.5px; line-height:1.6; max-width:840px; margin:0 auto; font-weight:500;">The foundational contract between designers and the AI pipeline, defining standards for Figma authoring, component specs, system manifests, and AI skill automation.</p>
+      </div>
+
+      <!-- Root Node Box -->
+      <div class="contract-root-box reveal-on-scroll">
+        <span class="material-symbols-outlined" style="color:#0B57D0; font-size:32px;" aria-hidden="true">assignment_turned_in</span>
+        <div class="contract-root-title">Phase 1: Documentation Contract</div>
+      </div>
+
+      <!-- Branching Connecting Lines SVG -->
+      <svg class="tree-branch-svg reveal-on-scroll" viewBox="0 0 1000 60" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" role="img" aria-label="Architecture hierarchy connector linking contract to 4 pillars">
+        <path d="M 500 0 V 25" stroke="#0B57D0" stroke-width="3" />
+        <path d="M 125 25 H 875" stroke="#0B57D0" stroke-width="3" />
+        <path d="M 125 25 V 60" stroke="#0B57D0" stroke-width="3" />
+        <path d="M 375 25 V 60" stroke="#0B57D0" stroke-width="3" />
+        <path d="M 625 25 V 60" stroke="#0B57D0" stroke-width="3" />
+        <path d="M 875 25 V 60" stroke="#0B57D0" stroke-width="3" />
+      </svg>
+
+      <!-- 4-Pillar Grid -->
+      <div class="contract-4-grid reveal-on-scroll">
+        
+        <!-- Pillar 1 -->
+        <div class="contract-pillar-column">
+          <div class="pillar-top-card">
+            <span class="pillar-title">Figma Page & Authoring Standard</span>
+          </div>
+          <span class="material-symbols-outlined pillar-arrow-icon" aria-hidden="true">south</span>
+          <div class="pillar-bottom-card">
+            <p class="pillar-desc-text">The agreement between designers and the AI pipeline on how Figma files are organized and annotated.</p>
+            <div class="pillar-folder-badge">1_Figma_File/</div>
+          </div>
+        </div>
+
+        <!-- Pillar 2 -->
+        <div class="contract-pillar-column">
+          <div class="pillar-top-card">
+            <span class="pillar-title">Component Spec Schema</span>
+          </div>
+          <span class="material-symbols-outlined pillar-arrow-icon" aria-hidden="true">south</span>
+          <div class="pillar-bottom-card">
+            <p class="pillar-desc-text">Usage guidelines, rules, dos & don'ts, prompt rules</p>
+            <div class="pillar-folder-badge">2_Component_Specs/</div>
+          </div>
+        </div>
+
+        <!-- Pillar 3 -->
+        <div class="contract-pillar-column">
+          <div class="pillar-top-card">
+            <span class="pillar-title">DS Manifest (.json)</span>
+          </div>
+          <span class="material-symbols-outlined pillar-arrow-icon" aria-hidden="true">south</span>
+          <div class="pillar-bottom-card">
+            <p class="pillar-desc-text">Machine-readable system registry index & design token variable collections.</p>
+            <div class="pillar-folder-badge">3_DS_Manifest/</div>
+          </div>
+        </div>
+
+        <!-- Pillar 4 -->
+        <div class="contract-pillar-column">
+          <div class="pillar-top-card">
+            <span class="pillar-title">Skill Suite</span>
+          </div>
+          <span class="material-symbols-outlined pillar-arrow-icon" aria-hidden="true">south</span>
+          <div class="pillar-bottom-card">
+            <p class="pillar-desc-text">Automates parsing Figma API to build items #2 and #3 without manual effort.</p>
+            <div class="pillar-folder-badge">4_Skill_Suite/</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- 4. PLAYBOOK & DOD SECTION (EXACT FIGMA NODE 42:69 REPLICATION) -->
+  <section id="playbook" class="section-playbook-light">
+    <div class="container">
+      <div class="playbook-node-layout">
+        
+        <!-- Left Column: Playbook Steps Container (Node 42:85) -->
+        <div class="playbook-steps-left reveal-on-scroll">
+          <div>
+            <div class="skill-tag-chip-blue" style="margin-bottom: 12px; width: fit-content;">DESIGNER PLAYBOOK</div>
+            <h2 class="playbook-heading-title">4-Step Playbook<br>Workflow</h2>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:20px;">
+            <div class="playbook-step-item active" onclick="selectPlaybookStep(1)" data-step-id="1">
+              <span class="playbook-step-title">Step 1: Clean & Audit</span>
+              <p class="playbook-step-desc">Perform layer hygiene, delete unused properties, and ensure 100% token variable binding.</p>
+            </div>
+
+            <div class="playbook-step-item" onclick="selectPlaybookStep(2)" data-step-id="2">
+              <span class="playbook-step-title">Step 2: Knowledge String</span>
+              <p class="playbook-step-desc">Write description format: <code>Purpose | Intent | Logic | A11y</code> into Figma native Description field.</p>
+            </div>
+
+            <div class="playbook-step-item" onclick="selectPlaybookStep(3)" data-step-id="3">
+              <span class="playbook-step-title">Step 3: Component Spec (.md)</span>
+              <p class="playbook-step-desc">Run automated extractor to generate tool-agnostic specification.</p>
+            </div>
+
+            <div class="playbook-step-item" onclick="selectPlaybookStep(4)" data-step-id="4">
+              <span class="playbook-step-title">Step 4: Agent Logic Spec (.agent.md)</span>
+              <p class="playbook-step-desc">Extract semantic intent and JSON input data schema for AI orchestrators (Jetski).</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Media Placeholder with Animated Checklist (Node 43:110) -->
+        <div class="media-placeholder-card reveal-on-scroll">
+          <div>
+            <div class="checklist-header-row">
+              <h3 class="checklist-header-title">
+                <span class="material-symbols-outlined" style="color:#0B57D0;">fact_check</span>
+                Definition of Done
+              </h3>
+              <span id="checklist-counter" class="checklist-counter-badge">0/5 Verified</span>
+            </div>
+
+            <div class="checklist-progress-bar-bg">
+              <div id="checklist-progress-bar" class="checklist-progress-bar-fill"></div>
+            </div>
+
+            <div class="checklist-items-stack">
+              <div class="animated-check-item" data-step="1" onclick="toggleChecklistItem(this)">
+                <div class="animated-check-icon">
+                  <span class="material-symbols-outlined" style="font-size:16px;">check</span>
+                </div>
+                <span class="animated-check-text"><strong>Semantic Layer Naming:</strong> <code>Label &gt; Status Text</code> instead of <code>Text</code></span>
+              </div>
+
+              <div class="animated-check-item" data-step="1" onclick="toggleChecklistItem(this)">
+                <div class="animated-check-icon">
+                  <span class="material-symbols-outlined" style="font-size:16px;">check</span>
+                </div>
+                <span class="animated-check-text"><strong>0% Hardcoded Hex:</strong> ZERO raw hex codes or static pixels in CSS</span>
+              </div>
+
+              <div class="animated-check-item" data-step="2" onclick="toggleChecklistItem(this)">
+                <div class="animated-check-icon">
+                  <span class="material-symbols-outlined" style="font-size:16px;">check</span>
+                </div>
+                <span class="animated-check-text"><strong>Knowledge String & A11y:</strong> Embedded intent and accessibility metadata</span>
+              </div>
+
+              <div class="animated-check-item" data-step="3" onclick="toggleChecklistItem(this)">
+                <div class="animated-check-icon">
+                  <span class="material-symbols-outlined" style="font-size:16px;">check</span>
+                </div>
+                <span class="animated-check-text"><strong>Manifest Sync:</strong> Standardized <code>ds.config.json</code> registration</span>
+              </div>
+
+              <div class="animated-check-item" data-step="4" onclick="toggleChecklistItem(this)">
+                <div class="animated-check-icon">
+                  <span class="material-symbols-outlined" style="font-size:16px;">check</span>
+                </div>
+                <span class="animated-check-text"><strong>Dual-File System:</strong> <code>.ui.md</code> (render) + <code>.agent.md</code> (intent)</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid #E1E3E1; padding-top:16px; margin-top:12px;">
+            <span style="font-size:12px; color:#444746; font-family:var(--font-code);">AUTOMATED DOD PIPELINE</span>
+            <button onclick="restartChecklistAnimation()" style="background:none; border:none; color:#0B57D0; font-size:12px; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:4px;">
+              <span class="material-symbols-outlined" style="font-size:14px;">replay</span> Replay Checklist
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 4B. TOKEN SETUP & EXPORTING VARIABLES SECTION (EXACT FIGMA NODE 44:161 REPLICATION) -->
+  <section id="tokens" class="section-tokens-dark">
+    <div class="container">
+      <div class="tokens-split-layout">
+        
+        <!-- Left Column: Headline & 3 White Cards (Node 44:163) -->
+        <div class="tokens-left-content reveal-on-scroll">
+          <div class="skill-tag-chip-blue" style="border: 1px solid rgba(255, 255, 255, 0.4); background: transparent; color: #FFFFFF; width: fit-content; padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 600; letter-spacing: 1px;">TOKEN SETUP</div>
+          <h2 class="tokens-section-title">Exporting 100%<br>Pure Tokens from<br>Figma</h2>
+
+          <!-- 3 Step Cards with Numbers & Transparent Background -->
+          <div class="token-export-steps">
+            <div class="export-step-card">
+              <div class="step-num-badge">1</div>
+              <div>
+                <h4 class="step-title">Open Local Variables / Tokens Studio</h4>
+                <p class="step-desc">Open your Figma file's native Local Variables panel or launch the Tokens Studio plugin.</p>
+              </div>
+            </div>
+
+            <div class="export-step-card">
+              <div class="step-num-badge">2</div>
+              <div>
+                <h4 class="step-title">Select Light & Dark Mode Collections</h4>
+                <p class="step-desc">Ensure both Light and Dark mode variable collections (Color, Spacing, Typography) are selected for export.</p>
+              </div>
+            </div>
+
+            <div class="export-step-card">
+              <div class="step-num-badge">3</div>
+              <div>
+                <h4 class="step-title">Export to JSON Payload</h4>
+                <p class="step-desc">Click Export to JSON to generate the raw tokens.json payload used by our automated pipeline.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Media Placeholder with GIF (Node 44:248) -->
+        <div class="tokens-media-placeholder reveal-on-scroll">
+          <div class="gif-browser-mockup">
+            <div class="gif-browser-header">
+              <div class="window-dots">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+              </div>
+              <div class="gif-window-title">Figma Local Variables → tokens.json</div>
+              <div class="gif-live-badge">RECORDING</div>
+            </div>
+            <div class="gif-container">
+              <img src="./Assets/export_json.gif" alt="Figma Tokens JSON Export Animation" class="tokens-export-gif">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. THE 4-SKILL SUITE SECTION — LIGHT THEME -->
+  <section id="skills" class="section-skills-light">
+    <div class="container">
+      <div class="skills-split-layout">
+        
+        <!-- Left Headline Column (Node 34:238) -->
+        <div class="skills-left-headline reveal-on-scroll">
+          <div class="skill-tag-chip-blue" style="margin-bottom: 12px; width: fit-content;">AI SUPERPOWERS</div>
+          <h2 class="skills-main-title" style="color:#1F1F1F;">The 4-Skill Suite</h2>
+          <p class="skills-subtitle-desc" style="color:#444746;">
+            Our four specialized AI skills work as an autonomous pipeline to parse Figma files, extract exact design tokens, compile production specs, and generate live test benches.
+          </p>
+        </div>
+
+        <!-- Right 2x2 White Cards Grid (Node 34:243) -->
+        <div class="skills-cards-grid">
+          
+          <!-- Card 1: Figma File Parser (Node 34:244) -->
+          <div class="skill-card-white reveal-on-scroll">
+            <div>
+              <div class="skill-card-icon-box">
+                <span class="material-symbols-outlined">account_tree</span>
+              </div>
+              <h3 class="skill-card-title">Figma File Parser</h3>
+              <p class="skill-card-body">
+                Navigates your Figma layer hierarchy to discover base components first, ensuring foundational building blocks (atoms) are compiled before complex components.
+              </p>
+            </div>
+            <div class="skill-tag-group">
+              <span class="skill-tag-chip-blue">Topological DAG</span>
+              <span class="skill-tag-chip-blue">Spatial x/y Sorting</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Metadata Extractor (Node 34:255) -->
+          <div class="skill-card-white reveal-on-scroll">
+            <div>
+              <div class="skill-card-icon-box">
+                <span class="material-symbols-outlined">code_blocks</span>
+              </div>
+              <h3 class="skill-card-title">Metadata Extractor</h3>
+              <p class="skill-card-body">
+                Extracts exact component properties, layout rules, and variable font settings directly from Figma payloads, guaranteeing 100% token purity with zero hardcoded values.
+              </p>
+            </div>
+            <div class="skill-tag-group">
+              <span class="skill-tag-chip-blue">Google Sans Flex ROND</span>
+              <span class="skill-tag-chip-blue">componentPropertyDefinitions</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Production Spec Compiler (Node 34:266) -->
+          <div class="skill-card-white reveal-on-scroll">
+            <div>
+              <div class="skill-card-icon-box">
+                <span class="material-symbols-outlined">description</span>
+              </div>
+              <h3 class="skill-card-title">Production Spec Compiler</h3>
+              <p class="skill-card-body">
+                Converts extracted design data into standardized, tool-agnostic Markdown specifications enriched with clear use cases, anti-patterns, and AI coding instructions.
+              </p>
+            </div>
+            <div class="skill-tag-group">
+              <span class="skill-tag-chip-blue">antiPatterns</span>
+              <span class="skill-tag-chip-blue">aiHints</span>
+            </div>
+          </div>
+
+          <!-- Card 4: Visualizer Manifest (Node 34:277) -->
+          <div class="skill-card-white reveal-on-scroll">
+            <div>
+              <div class="skill-card-icon-box">
+                <span class="material-symbols-outlined">sync</span>
+              </div>
+              <h3 class="skill-card-title">Visualizer Manifest</h3>
+              <p class="skill-card-body">
+                Registers newly created components into your system manifest (ds.config.json) and generates an interactive HTML test bench with live Light and Dark mode stage toggles.
+              </p>
+            </div>
+            <div class="skill-tag-group">
+              <span class="skill-tag-chip-blue">ds.config.json</span>
+              <span class="skill-tag-chip-blue">Live Test Bench</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. INTERACTIVE SHOWCASE (DARK OBSIDIAN THEME MATCHING NODE 34:237) -->
+  <section id="showcase" class="section-showcase-dark">
+    <div class="container">
+      <div class="reveal-on-scroll" style="margin-bottom: 48px; text-align: center;">
+        <div class="skill-tag-pill" style="margin: 0 auto 12px;">AI PROMPT & WORKSPACE BLUEPRINT</div>
+        <h2 style="font-family:'Google Sans Flex',sans-serif; font-size:38px; font-weight:700; color:#FFF; margin-bottom:12px;">Prompting External AI Agents for Component Variations</h2>
+        <p style="color:rgba(255,255,255,0.8); font-size:16px; max-width:840px; margin:0 auto;">Learn how to feed component specs, pure design tokens, and skill configurations to any external AI tool (ChatGPT, Claude, Cursor, v0, Bolt, GitHub Copilot) to generate brand-new component variations with 100% design system compliance.</p>
+      </div>
+
+      <!-- Two Column Layout: Master Prompt (Left) & Visual Directory Structure (Right) -->
+      <div class="showcase-two-column-layout reveal-on-scroll">
+        
+        <!-- Left Column: Master Prompt & Context Package -->
+        <div class="showcase-card-dark-glass">
+          <div>
+            <div class="card-title-row">
+              <div class="card-title-heading">
+                <span class="material-symbols-outlined" style="color:#00C2FF;">terminal</span>
+                <span>Master AI Prompt & Context Package</span>
+              </div>
+              <span class="card-title-badge-pill">COPY-PASTE READY</span>
+            </div>
+
+            <p style="color:rgba(255,255,255,0.75); font-size:13.5px; line-height:1.6; margin-bottom:16px;">
+              To generate non-existent component variations with zero hallucinations, attach the <strong>Context Package</strong> and use the structured master prompt below:
+            </p>
+
+            <!-- Context Package Pills -->
+            <div class="context-package-pills">
+              <div class="context-pill">
+                <span class="material-symbols-outlined" style="font-size:14px;">description</span>
+                1. Component Spec (.md)
+              </div>
+              <div class="context-pill">
+                <span class="material-symbols-outlined" style="font-size:14px;">palette</span>
+                2. Design Tokens (tokens.css)
+              </div>
+              <div class="context-pill">
+                <span class="material-symbols-outlined" style="font-size:14px;">widgets</span>
+                3. Base Component Atoms (.base/*.md)
+              </div>
+            </div>
+
+            <!-- Code Block with Prompt -->
+            <div class="prompt-code-container">
+              <div class="prompt-code-header">
+                <span>MASTER_PROMPT_TEMPLATE.md</span>
+                <button class="btn-copy-prompt" onclick="copyMasterPrompt(this)">
+                  <span class="material-symbols-outlined" style="font-size:14px;">content_copy</span>
+                  <span id="copy-btn-text">Copy Prompt</span>
+                </button>
+              </div>
+              <div id="master-prompt-code" class="prompt-code-body"># SYSTEM ROLE & CONTEXT
+You are an expert Frontend Engineer and Design System Specialist. You are building a new component variation for an Agentic Design System that enforces 100% Token Purity, zero hardcoded HEX values, and bottom-up atomic reuse.
+
+# INPUT ASSETS PROVIDED
+1. Base Component Spec (`TimeNavigation.md`): Attached
+2. Design Tokens Manifest (`tokens.css`): Attached
+3. Base Component Atoms (`IconButton.md`, `SegmentState.md`): Attached
+
+# NEW VARIATION OBJECTIVE
+Create a new variation called `TimeNavigation (Date Range Filter Mode)`:
+• Display a date range ("Oct 01 — Oct 31, 2026") instead of single date.
+• Include a "Compare to previous period" toggle pill atom.
+• Re-use `IconButton.md` for navigation arrows.
+
+# EXPECTED OUTPUT FORMAT
+1. Component Spec Supplement (`TimeNavigation_RangePicker.md`)
+2. Pure Token Test Bench (`TimeNavigation_RangePicker_Preview.html`)</div>
+            </div>
+          </div>
+
+          <div style="background:rgba(0, 194, 255, 0.08); border:1px solid rgba(0, 194, 255, 0.25); border-radius:14px; padding:14px 18px; font-size:12.5px; color:rgba(255,255,255,0.85); line-height:1.5; display:flex; gap:12px; align-items:flex-start;">
+            <span class="material-symbols-outlined" style="color:#00C2FF; font-size:20px; flex-shrink:0;">lightbulb</span>
+            <div>
+              <strong style="color:#FFF;">Why this works:</strong> Providing the <code>.md</code> spec and <code>tokens.css</code> forces external AI models to follow exact component properties instead of inventing arbitrary HTML or hardcoded HEX colors.
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Visual Folder & Skill Architecture -->
+        <div class="showcase-card-dark-glass">
+          <div>
+            <div class="card-title-row">
+              <div class="card-title-heading">
+                <span class="material-symbols-outlined" style="color:#F59E0B;">folder_special</span>
+                <span>Workspace & Skill Directory Setup</span>
+              </div>
+              <span class="tree-tag tree-tag-skill" style="margin-top: 2px;">AGENTIC ARCHITECTURE</span>
+            </div>
+
+            <p style="color:rgba(255,255,255,0.75); font-size:13.5px; line-height:1.6; margin-bottom:16px;">
+              Visual blueprint of how your project repository and <code>.agents/skills/</code> folder must be organized for AI tools to discover tokens and specs automatically:
+            </p>
+
+            <!-- Directory Tree Visual Box -->
+            <div class="folder-tree-box">
+              <div class="tree-row">
+                <span class="material-symbols-outlined tree-icon-folder">folder_open</span>
+                <span style="font-weight:700; color:#FFF;">my-design-system-project/</span>
+              </div>
+
+              <!-- .agents/skills -->
+              <div class="tree-row indent-1">
+                <span class="material-symbols-outlined tree-icon-folder">folder</span>
+                <span style="color:#00C2FF; font-weight:600;">.agents/skills/</span>
+                <span class="tree-tag tree-tag-skill">Skills Root</span>
+              </div>
+              <div class="tree-row indent-2">
+                <span class="material-symbols-outlined tree-icon-folder">folder</span>
+                <span style="color:#00C2FF;">ds-component-builder/</span>
+              </div>
+              <div class="tree-row indent-3">
+                <span class="material-symbols-outlined tree-icon-skill">auto_awesome</span>
+                <span style="color:#A5D6FF;">SKILL.md</span>
+                <span class="tree-tag tree-tag-skill">Skill Blueprint</span>
+              </div>
+              <div class="tree-row indent-3">
+                <span class="material-symbols-outlined tree-icon-spec">text_snippet</span>
+                <span style="color:rgba(255,255,255,0.7);">rules/tokens_guide.md</span>
+              </div>
+
+              <!-- 1_Figma_Tokens -->
+              <div class="tree-row indent-1" style="margin-top:6px;">
+                <span class="material-symbols-outlined tree-icon-folder">folder</span>
+                <span style="color:#EC4899; font-weight:600;">1_Figma_Tokens/</span>
+                <span class="tree-tag tree-tag-token">Tokens Manifest</span>
+              </div>
+              <div class="tree-row indent-2">
+                <span class="material-symbols-outlined tree-icon-tokens">data_object</span>
+                <span style="color:#F472B6;">tokens.json</span>
+              </div>
+              <div class="tree-row indent-2">
+                <span class="material-symbols-outlined tree-icon-tokens">css</span>
+                <span style="color:#F472B6;">tokens.css</span>
+                <span class="tree-tag tree-tag-token">100% Pure Tokens</span>
+              </div>
+
+              <!-- 2_Component_Specs -->
+              <div class="tree-row indent-1" style="margin-top:6px;">
+                <span class="material-symbols-outlined tree-icon-folder">folder</span>
+                <span style="color:#3B82F6; font-weight:600;">2_Component_Specs/</span>
+                <span class="tree-tag tree-tag-spec">Specs & Schemas</span>
+              </div>
+              <div class="tree-row indent-2">
+                <span class="material-symbols-outlined tree-icon-folder">folder</span>
+                <span style="color:#60A5FA;">.base/</span>
+                <span style="font-size:11px; color:rgba(255,255,255,0.5);">(IconButton.md, SegmentState.md)</span>
+              </div>
+              <div class="tree-row indent-2">
+                <span class="material-symbols-outlined tree-icon-spec">description</span>
+                <span style="color:#93C5FD;">TimeNavigation.md</span>
+              </div>
+              <div class="tree-row indent-2">
+                <span class="material-symbols-outlined tree-icon-spec">description</span>
+                <span style="color:#93C5FD;">TimescaleNav.md</span>
+              </div>
+
+              <!-- 3_Test_Benches -->
+              <div class="tree-row indent-1" style="margin-top:6px;">
+                <span class="material-symbols-outlined tree-icon-folder">folder</span>
+                <span style="color:#10B981; font-weight:600;">3_Test_Benches/</span>
+                <span class="tree-tag tree-tag-preview">Previews</span>
+              </div>
+              <div class="tree-row indent-2">
+                <span class="material-symbols-outlined tree-icon-preview">html</span>
+                <span style="color:#6EE7B7;">TimeNavigation_Preview.html</span>
+              </div>
+              <div class="tree-row indent-2">
+                <span class="material-symbols-outlined tree-icon-preview">html</span>
+                <span style="color:#6EE7B7;">TimescaleNav_Preview.html</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:rgba(245, 158, 11, 0.08); border:1px solid rgba(245, 158, 11, 0.25); border-radius:14px; padding:14px 18px; font-size:12.5px; color:rgba(255,255,255,0.85); line-height:1.5; display:flex; gap:12px; align-items:flex-start; margin-top:20px;">
+            <span class="material-symbols-outlined" style="color:#F59E0B; font-size:20px; flex-shrink:0;">folder_zip</span>
+            <div>
+              <strong style="color:#FFF;">Skill Discovery:</strong> Placing <code>SKILL.md</code> inside <code>.agents/skills/</code> enables automated skill loading across Cursor, Claude, and Antigravity agents!
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. DOWNLOADS & RESOURCE HUB (LIGHT THEME MATCHING NODE 34:194) -->
+  <section id="downloads" class="section-downloads-light">
+    <div class="container">
+      <div class="reveal-on-scroll" style="margin-bottom: 48px; text-align: center;">
+        <div class="skill-tag-chip-blue" style="margin: 0 auto 12px; width: fit-content;">RESOURCES</div>
+        <h2 style="font-family:'Google Sans Flex',sans-serif; font-size:38px; font-weight:700; color:#1F1F1F; margin-bottom:12px;">Download Specs & Resources</h2>
+        <p style="color:#444746; font-size:16px;">Access all playbook documents, skill markdown files, and component packages directly.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="download-card-blue reveal-on-scroll">
+          <div>
+            <div class="skill-card-icon-box">
+              <span class="material-symbols-outlined">menu_book</span>
+            </div>
+            <h3 style="font-family:'Google Sans Flex',sans-serif; font-size:22px; font-weight:600; color:#1F1F1F; margin-bottom:8px;">Designer Playbook</h3>
+            <p style="color:#444746; font-size:14px; line-height:1.6; margin-bottom:20px;">The AI-Ready Figma Component Playbook Word Document outlining layer hygiene and description formats.</p>
+          </div>
+          <a href="./1 Figma File/The AI-Ready Figma Component Playbook.docx" download class="btn-secondary-blue" style="width:100%; justify-content:center;">
+            <span class="material-symbols-outlined" style="font-size:18px;">download</span>
+            Download Playbook (.DOCX)
+          </a>
+        </div>
+
+        <div class="download-card-blue reveal-on-scroll">
+          <div>
+            <div class="skill-card-icon-box">
+              <span class="material-symbols-outlined">article</span>
+            </div>
+            <h3 style="font-family:'Google Sans Flex',sans-serif; font-size:22px; font-weight:600; color:#1F1F1F; margin-bottom:8px;">Spec Template</h3>
+            <p style="color:#444746; font-size:14px; line-height:1.6; margin-bottom:20px;">Standardized Component Spec Schema Template for LLM token resolution and AI agent consumption.</p>
+          </div>
+          <a href="./2 Component Spec Schema/COMPONENT_SPEC_TEMPLATE.md" download class="btn-secondary-blue" style="width:100%; justify-content:center;">
+            <span class="material-symbols-outlined" style="font-size:18px;">download</span>
+            Download Spec Template
+          </a>
+        </div>
+
+        <div class="download-card-blue reveal-on-scroll">
+          <div>
+            <div class="skill-card-icon-box">
+              <span class="material-symbols-outlined">auto_awesome</span>
+            </div>
+            <h3 style="font-family:'Google Sans Flex',sans-serif; font-size:22px; font-weight:600; color:#1F1F1F; margin-bottom:8px;">4-Skill Suite</h3>
+            <p style="color:#444746; font-size:14px; line-height:1.6; margin-bottom:20px;">Complete Markdown Skill Suite for LLM Agent integration (Parser, Extractor, Compiler, Visualizer Sync).</p>
+          </div>
+          <a href="./4 Skill Suite/4_Skill_Suite.zip" download="4_Skill_Suite.zip" class="btn-secondary-blue" style="width:100%; justify-content:center;">
+            <span class="material-symbols-outlined" style="font-size:18px;">download</span>
+            Download 4-Skill Suite (.ZIP)
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>© 2026 AI-Vision • Agentic Design Systems Research • Powered by Google DeepMind Agentic Coding Framework</p>
+    </div>
+  </footer>
+
+  <script>
+    function copyMasterPrompt(btnEl) {
+      const codeText = document.getElementById('master-prompt-code').innerText;
+      navigator.clipboard.writeText(codeText).then(() => {
+        const copyTextSpan = document.getElementById('copy-btn-text');
+        const origText = copyTextSpan.innerText;
+        copyTextSpan.innerText = 'Copied!';
+        btnEl.style.background = '#10B981';
+        btnEl.style.color = '#FFFFFF';
+        btnEl.style.borderColor = '#10B981';
+        setTimeout(() => {
+          copyTextSpan.innerText = origText;
+          btnEl.style.background = 'rgba(0, 194, 255, 0.15)';
+          btnEl.style.color = '#00C2FF';
+          btnEl.style.borderColor = 'rgba(0, 194, 255, 0.4)';
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy prompt:', err);
+      });
+    }
+
+    function setActiveNav(element) {
+      const pills = document.querySelectorAll('.menu-item-pill');
+      pills.forEach(pill => pill.classList.remove('active'));
+      element.classList.add('active');
+    }
+
+    // Vision Tab Switcher (Node 35:115 Tabs)
+    const visionTabData = {
+      purity: {
+        heading: "Single Source of Truth with Zero Hardcoded Values.",
+        body: "Zero hardcoded hex codes (#FFFFFF) or static pixels (16px). All styles dynamically reference design system tokens (Light, Dark, Spacing), guaranteeing instant global theme updates without code debt.",
+        imgSrc: "./Assets/token-purity-img.png",
+        imgAlt: "Token Purity Visual Screenshot"
+      },
+      atomic: {
+        heading: "Building with Reusable Lego Bricks from the Ground Up.",
+        body: "Base component atoms (IconButton, SwitchToggle, SegmentState) in .base/ are compiled first. Parent components inherit these exact base atoms, guaranteeing 100% visual consistency.",
+        imgSrc: "./Assets/atomic-trees.png",
+        imgAlt: "Atomic Tree Hierarchy Screenshot"
+      },
+      dualnode: {
+        heading: "Connecting Master Design Rules with Real-World Variations.",
+        body: "Bridges canonical structural rules from Admin Master Core Nodes with real-world product permutations from Showcase Galleries, giving AI assistants the complete blueprint.",
+        imgSrc: "./Assets/node-master.png",
+        imgAlt: "Dual-Node Master & Showcase Screenshot"
+      }
+    };
+
+    function switchVisionTab(tabKey, element) {
+      const tabs = document.querySelectorAll('.vision-tab-item');
+      tabs.forEach(t => t.classList.remove('active'));
+      element.classList.add('active');
+
+      const data = visionTabData[tabKey];
+      if (data) {
+        document.getElementById('vision-card-heading').innerText = data.heading;
+        document.getElementById('vision-card-body').innerText = data.body;
+        
+        const imgEl = document.getElementById('vision-media-img');
+        if (imgEl) {
+          imgEl.style.opacity = '0';
+          setTimeout(() => {
+            imgEl.src = data.imgSrc;
+            imgEl.alt = data.imgAlt;
+            imgEl.style.opacity = '1';
+          }, 150);
+        }
+      }
+    }
+
+    // Interactive Mouse Gradient Spotlight (Cursor Following)
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let orbX = mouseX;
+    let orbY = mouseY;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    }, { passive: true });
+
+    function animateInteractiveGradient() {
+      orbX += (mouseX - orbX) * 0.08;
+      orbY += (mouseY - orbY) * 0.08;
+
+      const interactiveOrb = document.querySelector('.orb-interactive');
+      if (interactiveOrb) {
+        interactiveOrb.style.left = `${orbX}px`;
+        interactiveOrb.style.top = `${orbY}px`;
+      }
+
+      // Parallax movement for background Orbs
+      const purpleOrb = document.querySelector('.orb-purple');
+      const cyanOrb = document.querySelector('.orb-cyan');
+      if (purpleOrb) {
+        const shiftX = (mouseX - window.innerWidth / 2) * 0.03;
+        const shiftY = (mouseY - window.innerHeight / 2) * 0.03;
+        purpleOrb.style.transform = `translate(${shiftX}px, ${shiftY}px)`;
+      }
+      if (cyanOrb) {
+        const shiftX = (mouseX - window.innerWidth / 2) * -0.03;
+        const shiftY = (mouseY - window.innerHeight / 2) * -0.03;
+        cyanOrb.style.transform = `translate(${shiftX}px, ${shiftY}px)`;
+      }
+
+      requestAnimationFrame(animateInteractiveGradient);
+    }
+
+    // Hero Sequential Scroll Storytelling
+    function handleHeroScroll() {
+      const heroSection = document.getElementById('hero');
+      if (!heroSection) return;
+
+      const rect = heroSection.getBoundingClientRect();
+      const heroTotalScrollable = heroSection.offsetHeight - window.innerHeight; // 100vh of scroll
+      if (heroTotalScrollable <= 0) return;
+
+      // Progress from 0 to 1 as user scrolls through the 200vh hero section
+      const progress = Math.min(1, Math.max(0, -rect.top / heroTotalScrollable));
+
+      const titleElement = document.querySelector('.hero-main-title');
+      const subtitleWrapper = document.querySelector('.hero-subtitle-wrapper');
+
+      // Stage 1: Title is visible at start, then Fades Out completely between progress 0.05 and 0.40
+      const titleFadeProgress = Math.min(1, Math.max(0, (progress - 0.05) / 0.35));
+      if (titleElement) {
+        titleElement.style.opacity = (1 - titleFadeProgress).toString();
+        titleElement.style.transform = `translateY(${-titleFadeProgress * 50}px)`;
+      }
+
+      // Stage 2: Subtitle & Button Fade In ONLY AFTER title fades out (between progress 0.45 and 0.80)
+      const subtitleFadeProgress = Math.min(1, Math.max(0, (progress - 0.45) / 0.35));
+      if (subtitleWrapper) {
+        subtitleWrapper.style.opacity = subtitleFadeProgress.toString();
+        subtitleWrapper.style.transform = `translate(-50%, calc(-50% + ${(1 - subtitleFadeProgress) * 50}px))`;
+        if (subtitleFadeProgress > 0.15) {
+          subtitleWrapper.style.pointerEvents = 'auto';
+        } else {
+          subtitleWrapper.style.pointerEvents = 'none';
+        }
+      }
+    }
+
+    // Active Navigation ScrollSpy Observer
+    function handleNavScrollSpy() {
+      const sectionNavMap = [
+        { id: 'hero', targetHref: '#hero' },
+        { id: 'vision', targetHref: '#hero' },
+        { id: 'contract', targetHref: '#contract' },
+        { id: 'playbook', targetHref: '#playbook' },
+        { id: 'tokens', targetHref: '#tokens' },
+        { id: 'skills', targetHref: '#skills' },
+        { id: 'showcase', targetHref: '#showcase' },
+        { id: 'downloads', targetHref: '#showcase' }
+      ];
+
+      const scrollPosition = window.scrollY + 220; // Header offset
+      let activeTarget = '#hero';
+
+      for (let i = sectionNavMap.length - 1; i >= 0; i--) {
+        const sec = document.getElementById(sectionNavMap[i].id);
+        if (sec) {
+          const top = sec.offsetTop;
+          if (scrollPosition >= top) {
+            activeTarget = sectionNavMap[i].targetHref;
+            break;
+          }
+        }
+      }
+
+      const pills = document.querySelectorAll('.menu-item-pill');
+      pills.forEach(pill => {
+        if (pill.getAttribute('href') === activeTarget) {
+          pill.classList.add('active');
+        } else {
+          pill.classList.remove('active');
+        }
+      });
+
+      // Dynamic Logo Contrast Observer
+      const logoElement = document.querySelector('.brand-logo-text');
+      const sectionThemeMap = [
+        { id: 'hero', theme: 'dark' },
+        { id: 'vision', theme: 'light' },
+        { id: 'contract', theme: 'light' },
+        { id: 'playbook', theme: 'light' },
+        { id: 'tokens', theme: 'dark' },
+        { id: 'skills', theme: 'light' },
+        { id: 'showcase', theme: 'dark' },
+        { id: 'downloads', theme: 'light' }
+      ];
+
+      const headerOffsetPos = window.scrollY + 60; // Header position offset
+      let currentTheme = 'dark';
+
+      for (let i = sectionThemeMap.length - 1; i >= 0; i--) {
+        const sec = document.getElementById(sectionThemeMap[i].id);
+        if (sec) {
+          if (headerOffsetPos >= sec.offsetTop) {
+            currentTheme = sectionThemeMap[i].theme;
+            break;
+          }
+        }
+      }
+
+      if (logoElement) {
+        if (currentTheme === 'light') {
+          logoElement.classList.add('theme-light-logo');
+          logoElement.classList.remove('theme-dark-logo');
+        } else {
+          logoElement.classList.add('theme-dark-logo');
+          logoElement.classList.remove('theme-light-logo');
+        }
+      }
+    }
+
+    // Interactive Playbook Step & Checklist Integration Logic
+    function updateChecklistProgress() {
+      const items = document.querySelectorAll('.animated-check-item');
+      const checkedCount = document.querySelectorAll('.animated-check-item.checked').length;
+      const total = items.length;
+      const progressBar = document.getElementById('checklist-progress-bar');
+      const counter = document.getElementById('checklist-counter');
+
+      const percentage = (checkedCount / total) * 100;
+      if (progressBar) progressBar.style.width = `${percentage}%`;
+      if (counter) counter.innerText = `${checkedCount}/${total} Verified`;
+    }
+
+    function selectPlaybookStep(stepNumber) {
+      // Update step item active highlights
+      const stepItems = document.querySelectorAll('.playbook-step-item');
+      stepItems.forEach(item => {
+        const itemStepId = parseInt(item.getAttribute('data-step-id'), 10);
+        if (itemStepId === stepNumber) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+
+      // Check all checklist items up to or belonging to stepNumber
+      const items = document.querySelectorAll('.animated-check-item');
+      items.forEach(item => {
+        const itemStep = parseInt(item.getAttribute('data-step'), 10);
+        if (itemStep <= stepNumber) {
+          item.classList.add('checked');
+        } else {
+          item.classList.remove('checked');
+        }
+      });
+
+      updateChecklistProgress();
+    }
+
+    function toggleChecklistItem(el) {
+      if (el) {
+        el.classList.toggle('checked');
+        updateChecklistProgress();
+      }
+    }
+
+    let checklistAnimated = false;
+    function animateChecklist() {
+      if (checklistAnimated) return;
+      checklistAnimated = true;
+
+      const items = document.querySelectorAll('.animated-check-item');
+      const progressBar = document.getElementById('checklist-progress-bar');
+      const counter = document.getElementById('checklist-counter');
+      const total = items.length;
+
+      items.forEach((item, index) => {
+        setTimeout(() => {
+          item.classList.add('checked');
+          const count = index + 1;
+          const percentage = (count / total) * 100;
+          if (progressBar) progressBar.style.width = `${percentage}%`;
+          if (counter) counter.innerText = `${count}/${total} Verified`;
+        }, (index + 1) * 350);
+      });
+    }
+
+    function restartChecklistAnimation() {
+      const items = document.querySelectorAll('.animated-check-item');
+      items.forEach(item => item.classList.remove('checked'));
+      const stepItems = document.querySelectorAll('.playbook-step-item');
+      stepItems.forEach((step, idx) => {
+        if (idx === 0) step.classList.add('active');
+        else step.classList.remove('active');
+      });
+
+      const progressBar = document.getElementById('checklist-progress-bar');
+      const counter = document.getElementById('checklist-counter');
+      if (progressBar) progressBar.style.width = '0%';
+      if (counter) counter.innerText = '0/5 Verified';
+
+      checklistAnimated = false;
+      setTimeout(animateChecklist, 200);
+    }
+
+    // AI Prompt & Preview Generator Simulation
+    let promptSimulating = false;
+    function simulatePromptGeneration() {
+      if (promptSimulating) return;
+      promptSimulating = true;
+
+      const promptText = document.getElementById('prompt-text');
+      const statusTag = document.getElementById('prompt-status-tag');
+      const btn = document.getElementById('btn-generate-prompt');
+
+      if (btn) btn.style.opacity = '0.5';
+      if (statusTag) {
+        statusTag.innerText = 'PARSING FIGMA PAYLOAD...';
+        statusTag.style.color = '#FFBD2E';
+      }
+
+      const fullPrompt = "Generating TimescaleNav component... Binding 100% tokens from tokens.css... Building bottom-up atomic tree with SegmentState.md... Extracting componentPropertyDefinitions... Generating TimescaleNav_Preview.html test bench!";
+      
+      let charIndex = 0;
+      if (promptText) promptText.innerText = "";
+
+      const typeInterval = setInterval(() => {
+        if (charIndex < fullPrompt.length) {
+          if (promptText) promptText.innerText += fullPrompt.charAt(charIndex);
+          charIndex++;
+          if (charIndex === 30 && statusTag) {
+            statusTag.innerText = 'EXTRACTING TOKENS...';
+            statusTag.style.color = '#00C2FF';
+          } else if (charIndex === 80 && statusTag) {
+            statusTag.innerText = 'COMPILING SPEC...';
+            statusTag.style.color = '#C084FC';
+          } else if (charIndex === 130 && statusTag) {
+            statusTag.innerText = 'BUILDING TEST BENCH...';
+            statusTag.style.color = '#10B981';
+          }
+        } else {
+          clearInterval(typeInterval);
+          if (statusTag) {
+            statusTag.innerText = 'GENERATED LIVE TEST BENCH (100% PURITY)';
+            statusTag.style.color = '#10B981';
+          }
+          if (btn) btn.style.opacity = '1';
+          promptSimulating = false;
+        }
+      }, 20);
+    }
+
+    // Scroll Reveal Observer & DOM Initializations
+    document.addEventListener('DOMContentLoaded', () => {
+      animateInteractiveGradient();
+
+      window.addEventListener('scroll', () => {
+        handleHeroScroll();
+        handleNavScrollSpy();
+      }, { passive: true });
+
+      handleHeroScroll();
+      handleNavScrollSpy();
+
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px 0px -60px 0px',
+        threshold: 0.1
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            if (entry.target.classList.contains('media-placeholder-card') || entry.target.id === 'playbook') {
+              animateChecklist();
+            }
+          }
+        });
+      }, observerOptions);
+
+      const revealElements = document.querySelectorAll('.reveal-on-scroll');
+      revealElements.forEach(el => observer.observe(el));
+    });
+  </script>
+
+</body>
+</html>
