@@ -1986,22 +1986,22 @@
             </div>
 
             <p style="color:rgba(255,255,255,0.75); font-size:13.5px; line-height:1.6; margin-bottom:16px;">
-              To generate non-existent component variations with zero hallucinations, attach the <strong>Context Package</strong> and use the structured master prompt below:
+              To test or execute the Phase 1 AI-Ready Design System pipeline on any component, attach the <strong>Context Package & Skill Suite</strong> and execute the structured master prompt below:
             </p>
 
             <!-- Context Package Pills -->
             <div class="context-package-pills">
               <div class="context-pill">
+                <span class="material-symbols-outlined" style="font-size:14px;">psychology</span>
+                1. 4 Skill Suite (.md)
+              </div>
+              <div class="context-pill">
                 <span class="material-symbols-outlined" style="font-size:14px;">description</span>
-                1. Component Spec (.md)
+                2. Spec Schema & Template
               </div>
               <div class="context-pill">
                 <span class="material-symbols-outlined" style="font-size:14px;">palette</span>
-                2. Design Tokens (tokens.css)
-              </div>
-              <div class="context-pill">
-                <span class="material-symbols-outlined" style="font-size:14px;">widgets</span>
-                3. Base Component Atoms (.base/*.md)
+                3. DS Manifest & Tokens
               </div>
             </div>
 
@@ -2014,30 +2014,30 @@
                   <span id="copy-btn-text">Copy Prompt</span>
                 </button>
               </div>
-              <div id="master-prompt-code" class="prompt-code-body"># SYSTEM ROLE & CONTEXT
-You are an expert Frontend Engineer and Design System Specialist. You are building a new component variation for an Agentic Design System that enforces 100% Token Purity, zero hardcoded HEX values, and bottom-up atomic reuse.
+              <div id="master-prompt-code" class="prompt-code-body">I want to test our Phase 1 AI-Ready Design System pipeline on ONE component from our Health project.
 
-# INPUT ASSETS PROVIDED
-1. Base Component Spec (`TimeNavigation.md`): Attached
-2. Design Tokens Manifest (`tokens.css`): Attached
-3. Base Component Atoms (`IconButton.md`, `SegmentState.md`): Attached
+Workspace Location:
+/Users/micolta/vally/ds-research/Health/PHASE 1_ Agentic Component Package Creation/Agentic_Design_Systems_Showcase
 
-# NEW VARIATION OBJECTIVE
-Create a new variation called `TimeNavigation (Date Range Filter Mode)`:
-• Display a date range ("Oct 01 — Oct 31, 2026") instead of single date.
-• Include a "Compare to previous period" toggle pill atom.
-• Re-use `IconButton.md` for navigation arrows.
+Target Figma File:
+https://www.figma.com/design/zDkmLapYpivd4KMlcKkRuE/AI-Vision-Health-Pilot?node-id=0-1
 
-# EXPECTED OUTPUT FORMAT
-1. Component Spec Supplement (`TimeNavigation_RangePicker.md`)
-2. Pure Token Test Bench (`TimeNavigation_RangePicker_Preview.html`)</div>
+Please execute the following test workflow:
+
+1. **Parse & Find Component:** Follow 4 Skill Suite/SKILL_Figma_File_Parser.md to locate &lt;ComponentName&gt;
+2. **Extract Metadata & Tokens:** Follow 4 Skill Suite/SKILL_Figma_Metadata_Extractor.md to read variant props, descriptions, and color tokens cross-referenced with 3 DS Manifest/JSON files/Scheme/Light.tokens.json &amp; Dark.tokens.json.
+3. **Compile Spec:** Follow 4 Skill Suite/SKILL_Figma_to_MD_Compiler.md to compile and write the spec to 2 Component Spec Schema/&lt;ComponentName&gt;.md using 2 Component Spec Schema/COMPONENT_SPEC_TEMPLATE.md.
+4. **Update Manifest:** Follow 4 Skill Suite/SKILL_Visualizer_Manifest_Sync.md to update 3 DS Manifest/ds.config.json.
+5. **Show Preview:** Display:
+   - A summary of the generated &lt;ComponentName&gt;.md spec.
+   - An interactive HTML/CSS code snippet showing how the component renders visually with its light/dark tokens!</div>
             </div>
           </div>
 
           <div style="background:rgba(0, 194, 255, 0.08); border:1px solid rgba(0, 194, 255, 0.25); border-radius:14px; padding:14px 18px; font-size:12.5px; color:rgba(255,255,255,0.85); line-height:1.5; display:flex; gap:12px; align-items:flex-start;">
             <span class="material-symbols-outlined" style="color:#00C2FF; font-size:20px; flex-shrink:0;">lightbulb</span>
             <div>
-              <strong style="color:#FFF;">Why this works:</strong> Providing the <code>.md</code> spec and <code>tokens.css</code> forces external AI models to follow exact component properties instead of inventing arbitrary HTML or hardcoded HEX colors.
+              <strong style="color:#FFF;">Why this works:</strong> Directing the AI agent step-by-step through dedicated Skill Suite definitions and token JSON schemas ensures deterministic extraction, zero hardcoded HEX values, and automated spec generation.
             </div>
           </div>
         </div>
@@ -2054,56 +2054,31 @@ Create a new variation called `TimeNavigation (Date Range Filter Mode)`:
             </div>
 
             <p style="color:rgba(255,255,255,0.75); font-size:13.5px; line-height:1.6; margin-bottom:16px;">
-              Visual blueprint of how your project repository and <code>.agents/skills/</code> folder must be organized for AI tools to discover tokens and specs automatically:
+              Visual blueprint of how your project workspace is organized for AI agents to discover skills, token manifests, and spec schemas:
             </p>
 
             <!-- Directory Tree Visual Box -->
             <div class="folder-tree-box">
               <div class="tree-row">
                 <span class="material-symbols-outlined tree-icon-folder">folder_open</span>
-                <span style="font-weight:700; color:#FFF;">my-design-system-project/</span>
+                <span style="font-weight:700; color:#FFF;">Agentic_Design_Systems_Showcase/</span>
               </div>
 
-              <!-- .agents/skills -->
+              <!-- 1 Figma File -->
               <div class="tree-row indent-1">
                 <span class="material-symbols-outlined tree-icon-folder">folder</span>
-                <span style="color:#00C2FF; font-weight:600;">.agents/skills/</span>
-                <span class="tree-tag tree-tag-skill">Skills Root</span>
+                <span style="color:#EC4899; font-weight:600;">1 Figma File/</span>
+                <span class="tree-tag tree-tag-token">Figma Playbook</span>
               </div>
               <div class="tree-row indent-2">
-                <span class="material-symbols-outlined tree-icon-folder">folder</span>
-                <span style="color:#00C2FF;">ds-component-builder/</span>
-              </div>
-              <div class="tree-row indent-3">
-                <span class="material-symbols-outlined tree-icon-skill">auto_awesome</span>
-                <span style="color:#A5D6FF;">SKILL.md</span>
-                <span class="tree-tag tree-tag-skill">Skill Blueprint</span>
-              </div>
-              <div class="tree-row indent-3">
-                <span class="material-symbols-outlined tree-icon-spec">text_snippet</span>
-                <span style="color:rgba(255,255,255,0.7);">rules/tokens_guide.md</span>
+                <span class="material-symbols-outlined tree-icon-spec">description</span>
+                <span style="color:#F472B6;">The AI-Ready Figma Component Playbook.docx</span>
               </div>
 
-              <!-- 1_Figma_Tokens -->
+              <!-- 2 Component Spec Schema -->
               <div class="tree-row indent-1" style="margin-top:6px;">
                 <span class="material-symbols-outlined tree-icon-folder">folder</span>
-                <span style="color:#EC4899; font-weight:600;">1_Figma_Tokens/</span>
-                <span class="tree-tag tree-tag-token">Tokens Manifest</span>
-              </div>
-              <div class="tree-row indent-2">
-                <span class="material-symbols-outlined tree-icon-tokens">data_object</span>
-                <span style="color:#F472B6;">tokens.json</span>
-              </div>
-              <div class="tree-row indent-2">
-                <span class="material-symbols-outlined tree-icon-tokens">css</span>
-                <span style="color:#F472B6;">tokens.css</span>
-                <span class="tree-tag tree-tag-token">100% Pure Tokens</span>
-              </div>
-
-              <!-- 2_Component_Specs -->
-              <div class="tree-row indent-1" style="margin-top:6px;">
-                <span class="material-symbols-outlined tree-icon-folder">folder</span>
-                <span style="color:#3B82F6; font-weight:600;">2_Component_Specs/</span>
+                <span style="color:#3B82F6; font-weight:600;">2 Component Spec Schema/</span>
                 <span class="tree-tag tree-tag-spec">Specs & Schemas</span>
               </div>
               <div class="tree-row indent-2">
@@ -2113,26 +2088,50 @@ Create a new variation called `TimeNavigation (Date Range Filter Mode)`:
               </div>
               <div class="tree-row indent-2">
                 <span class="material-symbols-outlined tree-icon-spec">description</span>
-                <span style="color:#93C5FD;">TimeNavigation.md</span>
-              </div>
-              <div class="tree-row indent-2">
-                <span class="material-symbols-outlined tree-icon-spec">description</span>
-                <span style="color:#93C5FD;">TimescaleNav.md</span>
+                <span style="color:#93C5FD;">COMPONENT_SPEC_TEMPLATE.md</span>
               </div>
 
-              <!-- 3_Test_Benches -->
+              <!-- 3 DS Manifest -->
               <div class="tree-row indent-1" style="margin-top:6px;">
                 <span class="material-symbols-outlined tree-icon-folder">folder</span>
-                <span style="color:#10B981; font-weight:600;">3_Test_Benches/</span>
-                <span class="tree-tag tree-tag-preview">Previews</span>
+                <span style="color:#F59E0B; font-weight:600;">3 DS Manifest/</span>
+                <span class="tree-tag tree-tag-token">Tokens & Manifest</span>
               </div>
               <div class="tree-row indent-2">
-                <span class="material-symbols-outlined tree-icon-preview">html</span>
-                <span style="color:#6EE7B7;">TimeNavigation_Preview.html</span>
+                <span class="material-symbols-outlined tree-icon-tokens">data_object</span>
+                <span style="color:#FBBF24;">ds.config.json</span>
               </div>
               <div class="tree-row indent-2">
-                <span class="material-symbols-outlined tree-icon-preview">html</span>
-                <span style="color:#6EE7B7;">TimescaleNav_Preview.html</span>
+                <span class="material-symbols-outlined tree-icon-tokens">css</span>
+                <span style="color:#FBBF24;">tokens.css</span>
+              </div>
+              <div class="tree-row indent-2">
+                <span class="material-symbols-outlined tree-icon-folder">folder</span>
+                <span style="color:#FBBF24;">JSON files/Scheme/</span>
+                <span style="font-size:11px; color:rgba(255,255,255,0.5);">(Light & Dark.tokens.json)</span>
+              </div>
+
+              <!-- 4 Skill Suite -->
+              <div class="tree-row indent-1" style="margin-top:6px;">
+                <span class="material-symbols-outlined tree-icon-folder">folder</span>
+                <span style="color:#00C2FF; font-weight:600;">4 Skill Suite/</span>
+                <span class="tree-tag tree-tag-skill">Skill Suite</span>
+              </div>
+              <div class="tree-row indent-2">
+                <span class="material-symbols-outlined tree-icon-skill">auto_awesome</span>
+                <span style="color:#A5D6FF;">SKILL_Figma_File_Parser.md</span>
+              </div>
+              <div class="tree-row indent-2">
+                <span class="material-symbols-outlined tree-icon-skill">auto_awesome</span>
+                <span style="color:#A5D6FF;">SKILL_Figma_Metadata_Extractor.md</span>
+              </div>
+              <div class="tree-row indent-2">
+                <span class="material-symbols-outlined tree-icon-skill">auto_awesome</span>
+                <span style="color:#A5D6FF;">SKILL_Figma_to_MD_Compiler.md</span>
+              </div>
+              <div class="tree-row indent-2">
+                <span class="material-symbols-outlined tree-icon-skill">auto_awesome</span>
+                <span style="color:#A5D6FF;">SKILL_Visualizer_Manifest_Sync.md</span>
               </div>
             </div>
           </div>
@@ -2140,7 +2139,7 @@ Create a new variation called `TimeNavigation (Date Range Filter Mode)`:
           <div style="background:rgba(245, 158, 11, 0.08); border:1px solid rgba(245, 158, 11, 0.25); border-radius:14px; padding:14px 18px; font-size:12.5px; color:rgba(255,255,255,0.85); line-height:1.5; display:flex; gap:12px; align-items:flex-start; margin-top:20px;">
             <span class="material-symbols-outlined" style="color:#F59E0B; font-size:20px; flex-shrink:0;">folder_zip</span>
             <div>
-              <strong style="color:#FFF;">Skill Discovery:</strong> Placing <code>SKILL.md</code> inside <code>.agents/skills/</code> enables automated skill loading across Cursor, Claude, and Antigravity agents!
+              <strong style="color:#FFF;">Skill Discovery:</strong> Attaching or referencing these 4 skills enables automated component parsing, token extraction, spec compilation, and manifest synchronization!
             </div>
           </div>
         </div>
