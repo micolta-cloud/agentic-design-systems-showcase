@@ -2048,9 +2048,11 @@ Please execute the following test workflow:
 2. **Extract Metadata & Tokens:** Follow 4 Skill Suite/SKILL_Figma_Metadata_Extractor.md to read variant props, descriptions, and color tokens cross-referenced with 3 DS Manifest/JSON files/Scheme/Light.tokens.json &amp; Dark.tokens.json.
 3. **Compile Spec:** Follow 4 Skill Suite/SKILL_Figma_to_MD_Compiler.md to compile and write the spec to 2 Component Spec Schema/&lt;ComponentName&gt;.md using 2 Component Spec Schema/COMPONENT_SPEC_TEMPLATE.md.
 4. **Update Manifest:** Follow 4 Skill Suite/SKILL_Visualizer_Manifest_Sync.md to update 3 DS Manifest/ds.config.json.
-5. **Show Preview:** Display:
-   - A summary of the generated &lt;ComponentName&gt;.md spec.
-   - An interactive HTML/CSS code snippet showing how the component renders visually with its light/dark tokens!</div>
+5. **Show Interactive Preview & Test Bench:** Follow 4 Skill Suite/SKILL_Visualizer_Manifest_Sync.md to generate an interactive standalone test bench (`2 Component Spec Schema/&lt;ComponentName&gt;_Preview.html`) featuring:
+   - **Figma Component Variant & Property Matrix:** Control panel with variant dropdowns (`category`), boolean property checkboxes (`showOverline`, `showSupportiveLabel`, `showBodyCopy`, `showButtons`, `showCloseButton`, `showLeadingItem`), leading item toggles (`24px Icon` vs `72px Image`), and width toggles (`380px` vs `100% Fluid`).
+   - **Stage Theme Mode Toggle:** Toggle between `Light Theme` and `Dark Theme` to validate 100% token purity across themes without hardcoded HEX values.
+   - **Render Canvas & Token Footprint Bar:** Interactive render canvas with live DOM state updates, plus a token footprint bar displaying applied token specs (Corner Radius, Spacing, Typography).
+   - Display a summary of the generated &lt;ComponentName&gt;.md spec and launch the interactive test bench!</div>
             </div>
           </div>
 
